@@ -1,0 +1,30 @@
+<h1>All Posts</h1>
+<%= render "search" %>
+<hr>
+<%= paginate @posts %>
+<div class="flash-container">
+    <% if flash[:notice] %>
+        <div class="flash flash-notice">
+            <%= flash[:notice] %>
+        </div>
+        <% elsif flash[:alert]%>
+        <div class="flash flash-alert">
+            <%= flash[:alert] %>
+        </div>
+    <% end %>
+</div>
+<hr>
+<h3><%= link_to "Create New", new_post_path %></h3>
+<hr>
+<% @posts.each do |post| %>
+    <%= link_to post.title.titleize, post_path(post) %>
+    <% if post.body %>
+        <p>
+            <%= post.body.truncate(60) %>
+        </p>
+    <% end %>
+
+    <hr>
+
+<% end %>
+<%= paginate @posts %>

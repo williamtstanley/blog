@@ -1,0 +1,8 @@
+<div class="flash-container">
+<% unless @user.errors.empty? %>
+    <div class="errors flash">
+        <%= @user.errors.full_messages.join(", ") %>
+    </div>
+<% end %>
+</div>
+<%= render "user" %>

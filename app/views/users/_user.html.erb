@@ -1,0 +1,28 @@
+
+<div class="user-form-container">
+    <div class="user-form">
+        <h1>Create new User account</h1>
+        <%= form_for @user do |f| %>
+            <div class="input-container">
+                <%= f.text_field :first_name, placeholder: "First Name" %>
+            </div>
+            <div class="input-container">
+                <%= f.text_field :last_name, placeholder: "Last Name" %>
+            </div>
+            <div class="input-container">
+                <%= f.email_field :email, placeholder: "Email Address" %>
+            </div>
+            <% if !user_signed_in? %>
+                <div class="input-container">
+                    <%= f.password_field :password, placeholder: "Password" %>
+                </div>
+                <div class="input-container">
+                    <%= f.password_field :password_confirmation, placeholder: "Confirm Password" %>
+                </div>
+            <% else %>
+                <%= link_to "Change Password", change_password_path %>
+            <% end %>
+            <%= f.submit class: "button"%>
+        <% end %>
+    </div>
+</div>

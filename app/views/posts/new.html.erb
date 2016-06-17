@@ -1,0 +1,13 @@
+<h1>Create a new Blog post</h1>
+<div class="flash-container">
+    <% if flash[:notice] %>
+        <div class="flash flash-notice">
+            <%= flash[:notice] %>
+        </div>
+        <% elsif flash[:alert]%>
+        <div class="flash flash-alert">
+            <%= flash[:alert] %>
+        </div>
+    <% end %>
+</div>
+<%= render "form" %>

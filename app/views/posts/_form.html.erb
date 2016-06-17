@@ -1,0 +1,34 @@
+
+<div class="form-container">
+    <div class="errors">
+        <%= @post.errors.full_messages.join(", ") %>
+    </div>
+    <div class="form">
+        <%= form_for @post do |f| %>
+            <div class="input-container">
+            <%= f.label :title  %>
+            <%= f.text_field :title, {placeholder: "Post Title"}  %>
+            </div>
+            <div class="drop_down">
+                <%= f.collection_select :category_id, Category.order(created_at: :desc), :id, :title, {include_blank: 'Select a Category'} %>
+            </div>
+            <div class="input-container">
+                <%= f.label :body%>
+                <%= f.text_area :body, {rows: 10, cols: 100, placeholder: "Enter the full Post text here"}  %>
+            </div>
+            <%= f.submit %>
+        <% end %>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

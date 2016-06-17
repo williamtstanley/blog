@@ -1,0 +1,12 @@
+
+
+<% if @posts.most_recent%>
+    <h1>Most Recent Blog post</h1>
+    <% @posts.most_recent.each do |post| %>
+    <%= link_to post.title.titleize, post_path(post) %>
+    <p>
+        <%= post.body.truncate(100) %>
+    </p>
+    <hr>
+    <% end %>
+<% end %>

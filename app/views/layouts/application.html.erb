@@ -7,10 +7,28 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <nav class="nav-bar">
-        <%= link_to "Home", root_path %>
-        <%= link_to "About", about_path %>
-    </nav>
+    <div class="nav-bar">
+        <nav class="left-nav">
+            <%= link_to "Home", root_path %>
+            |
+            <%= link_to "About", about_path %>
+            |
+            <%= link_to "Blog", posts_path%>
+            |
+            <%= link_to "Create New", new_post_path %>
+        </nav>
+        <nav class="right-nav">
+            <% if user_signed_in? %>
+            <%= link_to "Hello, #{current_user.first_name}", edit_user_path(current_user)%>
+            |
+            <%= link_to "Sign Out", sessions_path, method: :delete %>
+            <% else %>
+            <%= link_to "Sign Up", new_user_path %>
+            |
+            <%= link_to "Sign In", new_session_path %>
+            <% end %>
+        </nav>
+    </div>
     <div class="content">
         <div class="container">
             <%= yield %>
