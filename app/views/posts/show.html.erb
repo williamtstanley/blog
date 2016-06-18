@@ -14,9 +14,11 @@
             Anonymous...
         </p>
     <% end %>
-    <%= link_to "Update", edit_post_path(@post) %>
-    |
-    <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %>
+    <% if can? :manage, @post %>
+        <%= link_to "Update", edit_post_path(@post) %>
+        |
+        <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %>
+    <% end %>
 </div>
 
 <h3>Comments</h3>
@@ -26,22 +28,26 @@
         <p class="by-line">
             Comment from: <%= com.user.full_name if com.user %>
         </p>
-        <%= link_to "Delete", post_comment_path(@post, com),
-        method: :delete,
-        data: {confirm: "Are you sure?"}%>
+        <% if (can? :manage, com) || (can? :manage, @post) %>
+            <%= link_to "Delete", post_comment_path(@post, com),
+            method: :delete,
+            data: {confirm: "Are you sure?"}%>
+        <% end %>
         <hr>
     </div>
 <% end %>
 
-<h3>Comment</h3>
-<div class="form-container">
-    <div class="errors">
-        <%= @comment.errors.full_messages.join(", ") %>
+<% if user_signed_in? %>
+    <h3>Comment</h3>
+    <div class="form-container">
+        <div class="errors">
+            <%= @comment.errors.full_messages.join(", ") %>
+        </div>
+    <%= form_for [@post, @comment] do |f| %>
+    <div class="input-container">
+        <%= f.text_area :body, {rows: 10, cols: 100, placeholder: "Enter the full comment text here"}  %>
     </div>
-<%= form_for [@post, @comment] do |f| %>
-<div class="input-container">
-    <%= f.text_area :body, {rows: 10, cols: 100, placeholder: "Enter the full comment text here"}  %>
-</div>
-<%= f.submit %>
+    <%= f.submit %>
+    <% end %>
 <% end %>
 

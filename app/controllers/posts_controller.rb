@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
     before_action :find_post, only: [:show, :edit, :update, :destroy]
     before_action :authenticate_user!, except: [:show, :index]
+
+
     def index
         @string = params[:search]
         @posts = Post.order(created_at: :desc).search(@string).page(params[:page]).per(7)

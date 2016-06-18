@@ -5,13 +5,13 @@ Rails.application.routes.draw do
     #about page
     get "/about" => "home#about"
 
-    get "/change_password" => "users#change_password", as: :change_password
-    patch "/change_password" => "users#update_password"
+    resources :users, only: [:new, :create, :edit, :update]
+    get "/change_password" => "users#change_password"
+    patch "/change_password" => "users#update_password", as: :update_password
 
     # get "/edit/user" => "user#edit"
 
     #USER CONTROL
-    resources :users, only: [:new, :create, :edit, :update]
     resources :sessions, only: [:new, :create] do
         delete :destroy, on: :collection
     end
