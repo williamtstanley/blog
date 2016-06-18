@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 gem 'kaminari'
 
+
+gem 'cancancan', '~> 1.10'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use postgresql as the database for Active Record

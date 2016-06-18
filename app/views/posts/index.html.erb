@@ -2,17 +2,7 @@
 <%= render "search" %>
 <hr>
 <%= paginate @posts %>
-<div class="flash-container">
-    <% if flash[:notice] %>
-        <div class="flash flash-notice">
-            <%= flash[:notice] %>
-        </div>
-        <% elsif flash[:alert]%>
-        <div class="flash flash-alert">
-            <%= flash[:alert] %>
-        </div>
-    <% end %>
-</div>
+
 <hr>
 <h3><%= link_to "Create New", new_post_path %></h3>
 <hr>
