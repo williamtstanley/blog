@@ -1,8 +1,12 @@
 source 'https://rubygems.org'
 gem 'kaminari'
-
+gem 'font-awesome-rails'
 
 gem 'cancancan', '~> 1.10'
+
+# WORKER BACKGROUND PROCESS
+gem 'delayed_job_active_record'
+gem "delayed_job_web"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
@@ -52,7 +56,7 @@ group :development do
   gem 'awesome_print'
   gem 'interactive_editor'
   gem 'hirb'
-
+  gem "letter_opener", :group => :development
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end

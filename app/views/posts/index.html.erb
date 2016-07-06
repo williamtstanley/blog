@@ -2,9 +2,6 @@
 <%= render "search" %>
 <hr>
 <%= paginate @posts %>
-
-<hr>
-<h3><%= link_to "Create New", new_post_path %></h3>
 <hr>
 <% @posts.each do |post| %>
     <%= link_to post.title.titleize, post_path(post) %>

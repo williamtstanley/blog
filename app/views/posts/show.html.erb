@@ -14,6 +14,14 @@
             Anonymous...
         </p>
     <% end %>
+    <p>
+      Tags: <%= @post.tags.map {|t| t.title}.join(", ") %>
+    </p>
+    <% if @favorite.present? && @favorite.persisted? %>
+      <%= link_to fa_icon("star"), post_favorite_path(@post, @favorite), method: :delete, class: "bright-star" %>
+    <% else %>
+      <%= link_to fa_icon("star-o"), post_favorites_path(@post), method: :post, class: "grey-star" %>
+    <% end %>
     <% if can? :manage, @post %>
         <%= link_to "Update", edit_post_path(@post) %>
         |
@@ -38,16 +46,6 @@
 <% end %>
 
 <% if user_signed_in? %>
-    <h3>Comment</h3>
-    <div class="form-container">
-        <div class="errors">
-            <%= @comment.errors.full_messages.join(", ") %>
-        </div>
-    <%= form_for [@post, @comment] do |f| %>
-    <div class="input-container">
-        <%= f.text_area :body, {rows: 10, cols: 100, placeholder: "Enter the full comment text here"}  %>
-    </div>
-    <%= f.submit %>
-    <% end %>
+    <%= render "comment" %>
 <% end %>
 

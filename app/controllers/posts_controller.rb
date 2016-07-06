@@ -26,6 +26,7 @@ class PostsController < ApplicationController
 
     def show
         @comment = Comment.new
+        @favorite = @post.favorite_for(current_user)
     end
 
 
@@ -54,7 +55,7 @@ class PostsController < ApplicationController
     private
 
     def post_params
-        params.require(:post).permit(:title, :category_id, :body)
+        params.require(:post).permit(:title, :category_id, :body, {tag_ids: []})
     end
 
     def find_post

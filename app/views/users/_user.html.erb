@@ -1,7 +1,11 @@
 
 <div class="user-form-container">
     <div class="user-form">
-        <h1>Create new User account</h1>
+        <% if user_signed_in? %>
+            <h1>Update User info</h1>
+        <% else %>
+            <h1>Create new User account</h1>
+        <% end %>
         <%= form_for @user do |f| %>
             <div class="input-container">
                 <%= f.text_field :first_name, placeholder: "First Name" %>
@@ -20,7 +24,10 @@
                     <%= f.password_field :password_confirmation, placeholder: "Confirm Password" %>
                 </div>
             <% else %>
-                <%= link_to "Change Password", change_password_path %>
+
+                <div class="form-link">
+                <span> <%= link_to "Change Password", change_password_path %></span>
+                </div>
             <% end %>
             <%= f.submit class: "button"%>
         <% end %>

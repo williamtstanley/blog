@@ -1,0 +1,14 @@
+<div class="user-form-container">
+    <div class="user-form">
+        <h1>Password reset page</h1>
+        <div class="form-input">
+            <%= form_tag passwordresets_path do %>
+            <%= email_field_tag :email, nil, placeholder: "Enter your email Address" %>
+            <%= submit_tag "Submit", {class: "button"}%>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+
+

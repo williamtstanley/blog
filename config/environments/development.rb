@@ -35,6 +35,10 @@ Rails.application.configure do
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.default_url_options = {host: 'localhost:3000'}
+
+  config.active_job.queue_adapter = :delayed_job
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

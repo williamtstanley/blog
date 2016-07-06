@@ -1,4 +1,11 @@
 class Post < ActiveRecord::Base
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
+
+    has_many :favorites, dependent: :destroy
+    has_many :users, through: :favorites
+
+
     has_many :comments, dependent: :destroy
     belongs_to :category
     belongs_to :user
@@ -20,6 +27,10 @@ class Post < ActiveRecord::Base
 
     def new_first_comments
         comments.order(created_at: :desc)
+    end
+
+    def favorite_for(user)
+      favorites.find_by_user_id(user)
     end
 
 end

@@ -25,14 +25,6 @@ class ApplicationController < ActionController::Base
 end
 
 
-# puts "***"
-# puts "@current_user: #{@current_user.to_json}"
-# puts "class: #{@current_user.class}"
-# puts "session variable: #{session[:user_id]}"
-# puts "sql results #{User.find(session[:user_id]).to_json}"
-# puts json: @current_user
-# return @current_user
-
 
 
 

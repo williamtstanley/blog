@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
     #index page
     root "home#index"
     #about page
@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     patch "/change_password" => "users#update_password", as: :update_password
 
     # get "/edit/user" => "user#edit"
+    resources :passwordresets, only: [:new, :create, :edit, :update]
 
     #USER CONTROL
     resources :sessions, only: [:new, :create] do
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
     #BLOG CONTROL
     resources :posts do
         resources :comments, only:[:create, :destroy]
+        resources :favorites, only:[:create, :destroy]
     end
     resources :comments
 

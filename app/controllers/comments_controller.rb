@@ -19,7 +19,8 @@ class CommentsController < ApplicationController
         @comment.post = @post
         @comment.user = current_user
         if @comment.save
-            redirect_to post_path(@post)
+          CommentsMailer.notify_comment_owner(@comment).deliver_later unless @comment.user == current_user
+          redirect_to post_path(@post)
         else
             render "posts/show"
         end
