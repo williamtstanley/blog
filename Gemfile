@@ -1,12 +1,21 @@
 source 'https://rubygems.org'
+# pagination
 gem 'kaminari'
-gem 'font-awesome-rails'
 
+# user rights controller
 gem 'cancancan', '~> 1.10'
 
 # WORKER BACKGROUND PROCESS
 gem 'delayed_job_active_record'
 gem "delayed_job_web"
+
+# style
+gem 'font-awesome-rails'
+gem 'bootstrap-sass'
+gem 'bootswatch-rails'
+
+#remote access
+gem 'rack-cors', require: 'rack/cors'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
@@ -41,7 +50,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'pry'
+  gem 'pry-byebug'
   gem 'pry-rails'
   gem 'byebug'
   gem 'rspec-rails'

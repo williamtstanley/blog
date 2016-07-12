@@ -1,0 +1,32 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Sign In</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_tag sessions_path do %>
+          <div class="form-group">
+            <%= label_tag :email %>
+            <% if @user %>
+                <%= email_field_tag :email, @user.email, {placeholder: "Email Address", class: "form-control"} %>
+            <% else %>
+                <%= email_field_tag :email, nil, {placeholder: "Email Address", class: "form-control"} %>
+            <% end %>
+          </div>
+          <div class="form-group">
+            <%= label_tag :password %>
+            <%= password_field_tag :password, nil, {placeholder: "Password", class: "form-control"} %>
+          </div>
+            <%= submit_tag "Login", class: "btn btn-primary" %>
+
+        <% end %>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>

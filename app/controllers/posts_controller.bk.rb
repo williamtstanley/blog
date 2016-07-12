@@ -4,11 +4,9 @@ class PostsController < ApplicationController
 
 
     def index
-      @posts = Post.order(created_at: :desc).page(params[:page]).per(10)
-        respond_to do |format|
-          format.html
-          format.json {render json: @posts}
-        end
+        @string = params[:search]
+        @posts = Post.order(created_at: :desc).search(@string).page(params[:page]).per(7)
+
     end
 
     def new
@@ -16,24 +14,19 @@ class PostsController < ApplicationController
     end
 
     def create
-      @post = Post.new post_params
-      @post.user = current_user
-      if @post.save
-        redirect_to post_path(@post), notice: "New Post created!"
-      else
-        flash[:alert] = "Post failed!"
-        render :new
-      end
+        @post = Post.new post_params
+        @post.user = current_user
+        if @post.save
+            redirect_to post_path(@post), notice: "New Post created!"
+        else
+            flash[:alert] = "Post failed!"
+            render :new
+        end
     end
 
     def show
-        @post = Post.find(params[:id])
-        @user = User.find(post.user_id)
         @comment = Comment.new
-        respond_to do |format|
-          format.html
-          format.json {render json:{post: @post, comments: @post.coments, user: @user}}
-        end
+        @favorite = @post.favorite_for(current_user)
     end
 
 
@@ -68,5 +61,6 @@ class PostsController < ApplicationController
     def find_post
         @post = Post.find params[:id]
     end
+
 
 end

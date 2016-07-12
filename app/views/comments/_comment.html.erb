@@ -1,14 +1,11 @@
-<div class="form-container">
-    <div class="errors">
-        <%= @comment.errors.full_messages.join(", ") %>
+<div id="<%= dom_id(com) %>" class="comment">
+        <%= com.body %>
+        <p class="by-line">
+            Comment from: <%= com.user.full_name if com.user %>
+        </p>
+        <% if (can? :manage, com) || (can? :manage, @post) %>
+            <%= link_to "Delete", post_comment_path(@post, com),
+            method: :delete, remote: true%>
+        <% end %>
+        <hr>
     </div>
-
-<%= form_for @comment do |f| %>
-
-    <div class="input-container">
-        <%= f.label :body%>
-        <%= f.text_area :body, {rows: 10, cols: 100, placeholder: "Enter the full Post text here"}  %>
-    </div>
-
-    <%= f.submit %>
-<% end %>

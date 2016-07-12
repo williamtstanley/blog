@@ -18,11 +18,15 @@ class CommentsController < ApplicationController
         @post = Post.find params[:post_id]
         @comment.post = @post
         @comment.user = current_user
-        if @comment.save
-          CommentsMailer.notify_comment_owner(@comment).deliver_later unless @comment.user == current_user
-          redirect_to post_path(@post)
-        else
-            render "posts/show"
+        respond_to do |format|
+          if @comment.save
+            CommentsMailer.notify_comment_owner(@comment).deliver_later unless @comment.user == current_user
+            format.html {redirect_to post_path(@post)}
+            format.js {render :comment_success}
+          else
+            format.html {render "posts/show"}
+            format.js {render :comment_failure}
+          end
         end
     end
 
@@ -47,7 +51,10 @@ class CommentsController < ApplicationController
     def destroy
         post = Post.find params[:post_id]
         @comment.destroy
-        redirect_to post_path(post), notice: "Comment deleted"
+        respond_to do |format|
+          format.html {redirect_to post_path(post)}
+          format.js {render}
+        end
     end
 
     private
