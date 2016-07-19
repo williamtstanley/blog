@@ -1,0 +1,41 @@
+<div class="post-form-container">
+    <div class="post-form">
+        <% if @post.title %>
+            <h1>Edit Post</h1>
+        <% else %>
+            <h1>Create a new Blog entry</h1>
+        <% end %>
+        <div class="errors">
+            <%= @post.errors.full_messages.join(", ") %>
+        </div>
+        <div class="form">
+            <%= form_for @post do |f| %>
+                <div class="input-container">
+                <%= f.text_field :title, {placeholder: "Post Title"}  %>
+                </div>
+                <div class="drop_down">
+                    <%= f.collection_select :category_id, Category.order(created_at: :desc), :id, :title, {include_blank: 'Select a Category'} %>
+                </div>
+                <div class="input-container">
+                    <%= f.text_area :body, {rows: 10, placeholder: "Enter the full Post text here", class: "text-input"}  %>
+                </div>
+                  <%= f.label :tag_ids %>
+                  <%= f.collection_check_boxes(:tag_ids, Tag.order(:title), :id, :title)%>
+
+                <%= f.submit "Save post", {class: "button"}%>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

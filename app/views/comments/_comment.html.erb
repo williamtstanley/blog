@@ -1,0 +1,11 @@
+<div id="<%= dom_id(com) %>" class="comment">
+        <%= com.body %>
+        <p class="by-line">
+            Comment from: <%= com.user.full_name if com.user %>
+        </p>
+        <% if (can? :manage, com) || (can? :manage, @post) %>
+            <%= link_to "Delete", post_comment_path(@post, com),
+            method: :delete, remote: true%>
+        <% end %>
+        <hr>
+    </div>

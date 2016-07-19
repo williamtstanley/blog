@@ -1,0 +1,9 @@
+
+<span id="favorite">
+<% if @favorite.present? && @favorite.persisted? %>
+  <%= link_to fa_icon("star"), post_favorite_path(@post, @favorite), method: :delete, remote: true,  class: "bright-star" %>
+<% else %>
+  <%= link_to fa_icon("star-o"), post_favorites_path(@post), method: :post, remote: true, class: "grey-star" %>
+<% end %>
+</span>
+    

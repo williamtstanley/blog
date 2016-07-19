@@ -1,0 +1,41 @@
+
+<div class="post-container">
+    <h1><%= @post.title.titleize %></h1>
+
+    <p>
+        <%= @post.body %>
+    </p>
+    <% if @post.user %>
+        <p class="by-line">
+            Created by: <%= @post.user.full_name %>
+        </p>
+    <% else %>
+        <p class="by-line">
+            Anonymous...
+        </p>
+    <% end %>
+    <p>
+      Tags: <%= @post.tags.map {|t| t.title}.join(", ") %>
+  </p>
+  <div id="favorite-container">
+    <%= render "favorites/favorite" %>  
+    <% if can? :manage, @post %>
+      <%= link_to "Update", edit_post_path(@post) %>
+        |
+      <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %>
+    <% end %>
+  </div> 
+</div>
+<div id="comment-form">
+  <% if user_signed_in? %>
+    <%= render "/comments/form"%>
+  <% end %>
+</div>
+
+<h3>Comments</h3>
+<div id="comments">
+  <% @post.new_first_comments.each do |com| %>
+    <%= render "/comments/comment", com: com %> 
+  <% end %>
+</div>
+

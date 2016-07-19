@@ -7,12 +7,22 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <nav>
-        <%= link_to "Home", root_path %>
-        <%= link_to "About", about_path %>
-    </nav>
-
-<%= yield %>
+    <%= render "/layouts/navbar" %>
+    <%= render "shared/sign_in_modal" %>
+    <div class="container">
+      <div class="flash-error">
+        <% if flash[:notice] %>
+        <div class="flash flash-notice">
+          <%= flash[:notice] %>
+        </div>
+        <% elsif flash[:alert]%>
+        <div class="flash flash-alert">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+      </div>
+      <%= yield %>
+    </div>
 
 </body>
 </html>

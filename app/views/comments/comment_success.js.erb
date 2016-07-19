@@ -1,0 +1,4 @@
+$('#comments').prepend("<%= j(render('/comments/comment', {com: @comment})) %>");
+$('#comments div:first-child').hide().fadeIn(1000);
+<% @comment = Comment.new %>
+$("#comment-form").html("<%= j render '/comments/form' %>");

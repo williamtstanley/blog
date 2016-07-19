@@ -1,0 +1,15 @@
+<h1>All Comments</h1>
+
+<h3><%= link_to "Create New", new_comment_path %></h3>
+<hr>
+<% @comments.each do |comment| %>
+    <%= link_to comment.id, comment_path(comment) %>
+    <% if comment.body %>
+        <p>
+            <%= comment.body.truncate(60) %>
+        </p>
+    <% end %>
+
+    <hr>
+
+<% end %>

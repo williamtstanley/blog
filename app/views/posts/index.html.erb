@@ -1,0 +1,19 @@
+<h1>All Blogs</h1>
+
+<%= paginate @posts %>
+
+<% @posts.each do |post| %>
+    <%= link_to post.title, post_path(post) %>
+    <% if post.body.length > 60 %>
+        <p>
+            <%= post.body.truncate(60) %>
+        </p>
+    <% else %>
+        <p>
+            <%= post.body %>
+        </p>
+    <% end %>
+    <hr>
+
+<% end %>
+<%= paginate @posts %>

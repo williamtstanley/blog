@@ -1,0 +1,11 @@
+<div class="user-form-container">
+    <div class="user-form">
+        <h1>enter a new password</h1>
+        <%= form_tag passwordreset_path, method: :patch do %>
+            <%= hidden_field_tag :token, @token %>
+            <%= password_field_tag :password, nil, placeholder: "Enter your new password"%>
+            <%= password_field_tag :password_confirmation, nil, placeholder: "Confirm new password" %>
+            <%= submit_tag "Save Changes", {class: "button"}%>
+        <% end %>
+    </div>
+</div
